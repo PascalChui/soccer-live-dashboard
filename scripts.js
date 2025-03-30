@@ -19,40 +19,55 @@ function initializeSofascoreWidgets() {
     // This is an example ID - you would need the actual ID from Sofascore's API
     const interVsCityMatchId = 11021548; // Example ID, replace with actual ID for the match
     
-    // Initialize featured match widget
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-featured-match',
-        type: 'match', 
-        matchId: interVsCityMatchId,
-        theme: 'dark',
-        displayMode: 'extended'
-    });
-    
-    // Initialize momentum widget
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-momentum',
-        type: 'match-momentum',
-        matchId: interVsCityMatchId,
-        theme: 'light'
-    });
-    
-    // Initialize statistics widget
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-statistics',
-        type: 'match-statistics',
-        matchId: interVsCityMatchId,
-        theme: 'light'
-    });
-    
-    // Initialize today's matches widget
-    // Sport ID 1 is for soccer
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-matches',
-        type: 'day-schedule',
-        sportId: 1,
-        theme: 'light',
-        displayMode: 'top-matches'
-    });
+    // Initialize featured match widget - using updated API format
+    if (window.SofaScoreEmbed) {
+        // Featured match widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-featured-match',
+            {
+                matchId: interVsCityMatchId,
+                theme: 'dark',
+                width: '100%'
+            }
+        );
+        
+        // Momentum widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-momentum',
+            {
+                matchId: interVsCityMatchId,
+                type: 'match-momentum',
+                theme: 'light',
+                width: '100%'
+            }
+        );
+        
+        // Statistics widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-statistics',
+            {
+                matchId: interVsCityMatchId,
+                type: 'match-statistics',
+                theme: 'light',
+                width: '100%'
+            }
+        );
+        
+        // Today's matches widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-matches',
+            {
+                sport: 'football',
+                type: 'daily-matches',
+                date: new Date().toISOString().split('T')[0],
+                theme: 'light',
+                width: '100%'
+            }
+        );
+    } else {
+        console.error('SofaScore widget library not loaded properly');
+        handleWidgetError('sofascore-featured-match', 'Widget library not loaded');
+    }
 }
 
 // Function to refresh data
@@ -65,28 +80,40 @@ function refreshData() {
 
 // Toggle match selection
 function selectMatch(matchId) {
-    // Update featured match, momentum, and statistics widgets with the new match ID
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-featured-match',
-        type: 'match', 
-        matchId: matchId,
-        theme: 'dark',
-        displayMode: 'extended'
-    });
-    
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-momentum',
-        type: 'match-momentum',
-        matchId: matchId,
-        theme: 'light'
-    });
-    
-    window.SofaScoreWidgets.init({
-        element: '#sofascore-statistics',
-        type: 'match-statistics',
-        matchId: matchId,
-        theme: 'light'
-    });
+    // Update widgets with the new match ID
+    if (window.SofaScoreEmbed) {
+        // Featured match widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-featured-match',
+            {
+                matchId: matchId,
+                theme: 'dark',
+                width: '100%'
+            }
+        );
+        
+        // Momentum widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-momentum',
+            {
+                matchId: matchId,
+                type: 'match-momentum',
+                theme: 'light',
+                width: '100%'
+            }
+        );
+        
+        // Statistics widget
+        window.SofaScoreEmbed.addWidget(
+            'sofascore-statistics',
+            {
+                matchId: matchId,
+                type: 'match-statistics',
+                theme: 'light',
+                width: '100%'
+            }
+        );
+    }
 }
 
 // Error handling function for widget failures
