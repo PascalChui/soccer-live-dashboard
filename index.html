@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Soccer Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Live Soccer Dashboard</h1>
+            <div class="date-display" id="current-date"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="featured-match">
+            <h2>Featured Match</h2>
+            <!-- Sofascore Match Widget for Featured Match -->
+            <div id="sofascore-featured-match" class="sofascore-widget"></div>
+        </section>
+
+        <section class="match-details">
+            <div class="match-section">
+                <h3>Match Momentum</h3>
+                <!-- Sofascore Match Momentum Widget -->
+                <div id="sofascore-momentum" class="sofascore-widget"></div>
+            </div>
+
+            <div class="match-section">
+                <h3>Live Statistics</h3>
+                <!-- Sofascore Match Statistics Widget -->
+                <div id="sofascore-statistics" class="sofascore-widget"></div>
+            </div>
+        </section>
+
+        <section class="other-matches">
+            <h2>Today's Other Matches</h2>
+            <!-- Sofascore Today's Matches Widget -->
+            <div id="sofascore-matches" class="sofascore-widget"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Data provided by Sofascore | Created by <a href="https://github.com/PascalChui/soccer-live-dashboard" target="_blank">Soccer Live Dashboard</a></p>
+        </div>
+    </footer>
+
+    <!-- Sofascore Widget Script -->
+    <script src="https://widgets.sofascore.com/embed.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
